@@ -22,7 +22,6 @@ public class UploadController implements UploadApi {
 
         this.invoiceService = invoiceService;
     }
-
     //Seriously, why is everything in the controller?
     // Also, having two services seems redundant
     // you can achieve the same with just one.
@@ -32,7 +31,6 @@ public class UploadController implements UploadApi {
         return ResponseEntity.ok("File uploaded and invoice saved.");
 
     }
-
 
     public ResponseEntity<List<Invoice>> getAllInvoices() {
         return ResponseEntity.ok(invoiceService.getAllInvoices());

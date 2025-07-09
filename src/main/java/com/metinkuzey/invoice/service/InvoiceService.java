@@ -47,7 +47,8 @@ public class InvoiceService {
                 .invoiceNumber("INV-" + System.currentTimeMillis())
                 .totalAmount(0.0)
                 .build();
-
+        logger.info("Saving invoice to the database");
         invoiceRepository.save(invoice);
+        logger.info("Invoice saved successfully");
     }
 }
