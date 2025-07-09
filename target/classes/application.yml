@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://terraform-20250707155341683000000001.clmww6k86swe.eu-central-1.rds.amazonaws.com:5432/invoicedb
+    username: invoicemaster
+    password: StrongPass123!
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+aws:
+  region: eu-central-1
+  s3:
+    bucket: metinkuzey-invoice-uploads

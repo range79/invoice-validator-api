@@ -22,8 +22,8 @@ public class S3Service {
     @Value("${aws.s3.bucket}")
     private String bucketName;
 
-    public String uploadFile(MultipartFile file) {
-        try {
+    public String uploadFile(MultipartFile file) throws IOException {
+
             // Create a temporary file to upload
             Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
             file.transferTo(tempFile.toFile());
@@ -42,8 +42,6 @@ public class S3Service {
 
             Files.deleteIfExists(tempFile);
             return file.getOriginalFilename();
-        } catch (IOException | S3Exception e) {
-            throw new RuntimeException("Failed to upload file to S3", e);
-        }
+
     }
 }

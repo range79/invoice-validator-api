@@ -1,23 +1,29 @@
 package com.metinkuzey.invoice.service;
 
+import com.metinkuzey.invoice.exception.FileExtensionNotAllowed;
 import com.metinkuzey.invoice.model.Invoice;
 import com.metinkuzey.invoice.repository.InvoiceRepository;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
+import java.io.IOException;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 public class InvoiceService {
 
     private static final Logger logger = LoggerFactory.getLogger(InvoiceService.class);
 
+    private final S3Service s3Service;
     private final InvoiceRepository invoiceRepository;
 
     @Autowired
-    public InvoiceService(InvoiceRepository invoiceRepository) {
+    public InvoiceService(S3Service s3Service, InvoiceRepository invoiceRepository) {
+        this.s3Service = s3Service;
         this.invoiceRepository = invoiceRepository;
     }
 
@@ -26,8 +32,22 @@ public class InvoiceService {
         return invoiceRepository.findAll();
     }
 
-    public Invoice saveInvoice(Invoice invoice) {
-        logger.info("Saving invoice with filename: {}", invoice.getFilename());
-        return invoiceRepository.save(invoice);
+    public void saveInvoice(MultipartFile file) throws IOException {
+
+        if (!Objects.equals(file.getContentType(), "application/pdf")) {
+            throw new  FileExtensionNotAllowed("File extension not allowed."+file.getContentType());
+        }
+        String uploadedFileName = s3Service.uploadFile(file);
+
+        Invoice invoice = Invoice.builder()
+                .filename(uploadedFileName)
+                .status("UPLOADED")
+                .vendor("UNKNOWN")
+                .currency("EUR")
+                .invoiceNumber("INV-" + System.currentTimeMillis())
+                .totalAmount(0.0)
+                .build();
+
+        invoiceRepository.save(invoice);
     }
 }
