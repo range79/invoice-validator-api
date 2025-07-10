@@ -33,10 +33,32 @@ A Spring Boot-based RESTful web service that processes and validates invoice fil
 
 ### Run Locally
 
+**Create `application.yml` in `src/main/resources/application.yml` like this:**
+
+```yaml
+spring:
+  datasource:
+    url: your-db-url
+    username: your-db-username
+    password: your-db-password
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+aws:
+  region: eu-central-1
+  s3:
+    bucket: metinkuzey-invoice-uploads
+```
+
+
 ```bash
 mvn clean install
 mvn spring-boot:run
 ```
+
 
 ### API Endpoints
 
@@ -57,14 +79,18 @@ Provisioned using Terraform:
 
 ```
 invoice-validator-api/
-├── controller/
-├── model/
-├── repository/
-├── service/
-├── resources/
-└── application.yml
+├── java/
+│   ├── api/
+│   ├── controller/
+│   ├── exception/
+│   ├── model/
+│   ├── repository/
+│   └── service/
+└── resources/
+    └── application.yml
+
 ```
 
 ## 📜 License
 
-This project is licensed under the MIT License.
+This project is licensed under the [MIT License.](LICENSE)
