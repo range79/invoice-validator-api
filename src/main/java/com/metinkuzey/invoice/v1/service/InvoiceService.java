@@ -1,8 +1,8 @@
-package com.metinkuzey.invoice.service;
+package com.metinkuzey.invoice.v1.service;
 
-import com.metinkuzey.invoice.exception.FileExtensionNotAllowed;
-import com.metinkuzey.invoice.model.Invoice;
-import com.metinkuzey.invoice.repository.InvoiceRepository;
+import com.metinkuzey.invoice.global.exception.FileExtensionNotAllowed;
+import com.metinkuzey.invoice.v1.model.Invoice;
+import com.metinkuzey.invoice.v1.repository.InvoiceRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;

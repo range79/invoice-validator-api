@@ -1,6 +1,6 @@
-package com.metinkuzey.invoice.api;
+package com.metinkuzey.invoice.v1.api;
 
-import com.metinkuzey.invoice.model.Invoice;
+import com.metinkuzey.invoice.v1.model.Invoice;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;

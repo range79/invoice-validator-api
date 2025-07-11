@@ -1,4 +1,4 @@
-package com.metinkuzey.invoice.exception;
+package com.metinkuzey.invoice.global.exception;
 
 import org.springframework.http.HttpStatus;
 

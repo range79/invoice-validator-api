@@ -1,10 +1,9 @@
-package com.metinkuzey.invoice.controller;
+package com.metinkuzey.invoice.v1.controller;
 
-import com.metinkuzey.invoice.api.UploadApi;
-import com.metinkuzey.invoice.model.Invoice;
-import com.metinkuzey.invoice.service.InvoiceService;
+import com.metinkuzey.invoice.v1.api.UploadApi;
+import com.metinkuzey.invoice.v1.model.Invoice;
+import com.metinkuzey.invoice.v1.service.InvoiceService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;

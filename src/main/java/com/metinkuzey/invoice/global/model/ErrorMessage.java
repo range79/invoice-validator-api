@@ -1,4 +1,4 @@
-package com.metinkuzey.invoice.model;
+package com.metinkuzey.invoice.global.model;
 
 import lombok.*;
 

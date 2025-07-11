@@ -1,4 +1,4 @@
-package com.metinkuzey.invoice.model;
+package com.metinkuzey.invoice.v1.model;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
