@@ -1,4 +1,4 @@
-package com.metinkuzey.invoice.v1.service;
+package com.metinkuzey.invoice.service;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
@@ -7,6 +7,7 @@ import software.amazon.awssdk.auth.credentials.DefaultCredentialsProvider;
 import software.amazon.awssdk.regions.Region;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
+import software.amazon.awssdk.services.s3.model.S3Exception;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -23,24 +24,24 @@ public class S3Service {
 
     public String uploadFile(MultipartFile file) throws IOException {
 
-            // Create a temporary file to upload
-            Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
-            file.transferTo(tempFile.toFile());
+        // Create a temporary file to upload
+        Path tempFile = Files.createTempFile("upload-", file.getOriginalFilename());
+        file.transferTo(tempFile.toFile());
 
-            S3Client s3Client = S3Client.builder()
-                    .region(Region.of(awsRegion))
-                    .credentialsProvider(DefaultCredentialsProvider.create())
-                    .build();
+        S3Client s3Client = S3Client.builder()
+                .region(Region.of(awsRegion))
+                .credentialsProvider(DefaultCredentialsProvider.create())
+                .build();
 
-            PutObjectRequest putObjectRequest = PutObjectRequest.builder()
-                    .bucket(bucketName)
-                    .key(file.getOriginalFilename())
-                    .build();
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(file.getOriginalFilename())
+                .build();
 
-            s3Client.putObject(putObjectRequest, tempFile);
+        s3Client.putObject(putObjectRequest, tempFile);
 
-            Files.deleteIfExists(tempFile);
-            return file.getOriginalFilename();
+        Files.deleteIfExists(tempFile);
+        return file.getOriginalFilename();
 
     }
 }

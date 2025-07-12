@@ -32,6 +32,7 @@ public class UploadController implements UploadApi {
     }
 
     public ResponseEntity<List<Invoice>> getAllInvoices() {
+
         return ResponseEntity.ok(invoiceService.getAllInvoices());
     }
 }
